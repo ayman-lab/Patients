@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html xmlns:th="htpp://www.thymleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymleaf/layout"
+      xmlns:sec="htpps://www.thymleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="/webjars/jquery/3.4.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <!-- Brand -->
+    <a class="navbar-brand" href="#">Patients</a>
+
+    <!-- Links -->
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{patients}">home</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="#">Medcins</a>
+        </li>
+
+        <!-- Dropdown -->
+        <li class="nav-item dropdown" >
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                Patients
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" sec:authorize="hasRole('ADMIN')" th:href="@{formPatient}">Ajouter </a>
+                <a class="dropdown-item" href="#">Chercher</a>
+
+            </div>
+        </li>
+    </ul>
+    <ul class="navbar-nav ml-auto">
+        <!-- Dropdown -->
+        <span sec:authorize="isAnonymous()">
+            <a class="btn btn-primary"  th:href="@{login}">Login </a>
+        </span>
+
+        <li class="nav-item dropdown" sec:authorize="isAuthenticated()">
+            <a class="nav-link dropdown-toggle" href="#" id="navbardrop1" data-toggle="dropdown">
+                <span >
+                    <span sec:authentication="name"></span>
+                </span>
+            </a>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" sec:authorize="isAuthenticated()" th:href="@{logout}">Logout</a>
+                <a class="dropdown-item" sec:authorize="isAuthenticated()" href="#">Profile</a>
+
+            </div>
+        </li>
+    </ul>
+</nav>
+<section layout:fragment="content">
+
+</section>
+
+</body>
+</html>
